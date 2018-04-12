@@ -1,9 +1,9 @@
 CREATE TABLE IF NOT EXISTS `extract_acct_submit` (
   `regno` varchar(14) CHARACTER SET latin1 NOT NULL DEFAULT '0',
-  `submit_date` datetime DEFAULT NULL,
+  `submit_date` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `arno` varchar(4) CHARACTER SET latin1 NOT NULL DEFAULT '',
   `fyend` char(4) CHARACTER SET latin1 DEFAULT NULL,
-  PRIMARY KEY (`regno`,`arno`)
+  PRIMARY KEY (`regno`,`submit_date`,`arno`)
 );
 
 CREATE TABLE IF NOT EXISTS `extract_aoo_ref` (
@@ -13,15 +13,14 @@ CREATE TABLE IF NOT EXISTS `extract_aoo_ref` (
   `aoosort` varchar(50) NOT NULL,
   `welsh` varchar(1) NOT NULL,
   `master` varchar(2) DEFAULT NULL,
-  `code` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`aootype`,`aookey`)
 );
 
 CREATE TABLE IF NOT EXISTS `extract_ar_submit` (
   `regno` varchar(14) CHARACTER SET latin1 NOT NULL DEFAULT '0',
   `arno` varchar(4) CHARACTER SET latin1 NOT NULL DEFAULT '',
-  `submit_date` datetime DEFAULT NULL,
-  PRIMARY KEY (`regno`,`arno`)
+  `submit_date` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`regno`,`arno`,`submit_date`)
 );
 
 CREATE TABLE IF NOT EXISTS `extract_charity` (
@@ -29,7 +28,7 @@ CREATE TABLE IF NOT EXISTS `extract_charity` (
   `subno` int(11) NOT NULL DEFAULT '0',
   `name` varchar(150) CHARACTER SET latin1 DEFAULT NULL,
   `orgtype` varchar(2) CHARACTER SET latin1 DEFAULT NULL,
-  `gd` varchar(250) CHARACTER SET latin1 DEFAULT NULL,
+  `gd` varchar(500) CHARACTER SET latin1 DEFAULT NULL,
   `aob` varchar(175) CHARACTER SET latin1 DEFAULT NULL,
   `aob_defined` char(1) CHARACTER SET latin1 DEFAULT NULL,
   `nhs` char(1) CHARACTER SET latin1 DEFAULT NULL,
@@ -41,7 +40,7 @@ CREATE TABLE IF NOT EXISTS `extract_charity` (
   `add4` varchar(35) CHARACTER SET latin1 DEFAULT NULL,
   `add5` varchar(35) CHARACTER SET latin1 DEFAULT NULL,
   `postcode` varchar(8) CHARACTER SET latin1 DEFAULT NULL,
-  `phone` varchar(23) CHARACTER SET latin1 DEFAULT NULL,
+  `phone` varchar(250) CHARACTER SET latin1 DEFAULT NULL,
   `fax` varchar(23) CHARACTER SET latin1 DEFAULT NULL,
   PRIMARY KEY (`regno`,`subno`)
 );
@@ -63,7 +62,7 @@ CREATE TABLE IF NOT EXISTS `extract_class` (
 
 CREATE TABLE IF NOT EXISTS `extract_class_ref` (
   `classno` int(11) NOT NULL DEFAULT '0',
-  `classtext` varchar(60) CHARACTER SET latin1 DEFAULT NULL,
+  `classtext` varchar(70) CHARACTER SET latin1 DEFAULT NULL,
   PRIMARY KEY (`classno`)
 );
 
@@ -102,7 +101,7 @@ CREATE TABLE IF NOT EXISTS `extract_objects` (
   `regno` varchar(14) CHARACTER SET latin1 NOT NULL DEFAULT '0',
   `subno` int(11) NOT NULL DEFAULT '0',
   `seqno` char(4) CHARACTER SET latin1 NOT NULL DEFAULT '',
-  `object` varchar(255) CHARACTER SET latin1 DEFAULT NULL,
+  `object` varchar(512) CHARACTER SET latin1 DEFAULT NULL,
   PRIMARY KEY (`regno`,`subno`,`seqno`)
 );
 
@@ -150,8 +149,8 @@ CREATE TABLE IF NOT EXISTS `extract_partb` (
   `funds_total` bigint(20) DEFAULT NULL,
   `employees` int(11) DEFAULT NULL,
   `volunteers` int(11) DEFAULT NULL,
-  `cons_acc` char(1) CHARACTER SET latin1 DEFAULT NULL,
-  `charity_acc` char(1) CHARACTER SET latin1 DEFAULT NULL,
+  `cons_acc` char(32) CHARACTER SET latin1 DEFAULT NULL,
+  `charity_acc` char(32) CHARACTER SET latin1 DEFAULT NULL,
   PRIMARY KEY (`regno`,`artype`)
 );
 
